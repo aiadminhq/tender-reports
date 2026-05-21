@@ -219,12 +219,13 @@ let records = [
       { name:"美術系特殊教室整修工程", org:"國立臺北藝術大學", case_no:"C115028", deadline:"115/06/01", deadline_iso:"2026-06-01", days_left:11, budget:"878", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjM1MTg=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"115年度北門智慧圖書館空間裝修工程", org:"臺北市立圖書館", case_no:"11507HY", deadline:"115/06/03", deadline_iso:"2026-06-03", days_left:13, budget:"315", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjYzMDM=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"115年臺北市內湖行政中心1樓調解會空間整修工程", org:"臺北市內湖區公所", case_no:"1151009", deadline:"115/06/03", deadline_iso:"2026-06-03", days_left:13, budget:"434", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjY3MTc=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
-      { name:"本院醫療大樓空調箱汰換、門診手術室濕度改善及門急診大樓頂樓空調機房電力改善工程", org:"衛生福利部桃園醫院", case_no:"114TY1202", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"1672", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjM1MDc=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"八德區霖園公園遮雨棚設施改善工程", org:"桃園市八德區公所", case_no:"BB1150520A", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"434", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjYyODE=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"八德區豐德公園及公二公園步道改善工程", org:"桃園市八德區公所", case_no:"BB1150520", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"1454", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjYxODM=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
+      { name:"本院醫療大樓空調箱汰換、門診手術室濕度改善及門急診大樓頂樓空調機房電力改善工程", org:"衛生福利部桃園醫院", case_no:"114TY1202", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"1672", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjM1MDc=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"楊梅區富岡運動公園籃球場改善工程", org:"桃園市楊梅區公所", case_no:"YM-115010", deadline:"115/06/08", deadline_iso:"2026-06-08", days_left:18, budget:"521", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjcxMTk=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" }
     ]
   },
+  
   
   
   
@@ -415,9 +416,11 @@ renderTable();
 <!-- PRIORITY_BLOCK_START -->
 <style>
 #priorityCards{margin:18px 0;padding:16px 20px;background:linear-gradient(135deg,#2a1f08,#3b2a0a);border:1px solid #b8860b;border-radius:10px;box-shadow:0 0 18px #b8860b22;}
-#priorityCards .pc-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+#priorityCards .pc-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
 #priorityCards .pc-title{color:#fbbf24;font-size:1rem;font-weight:700;}
 #priorityCards .pc-sub{color:#fde68a;font-size:0.78rem;}
+#priorityCards .pc-rule-label{color:#fbbf24;font-size:0.75rem;font-weight:600;margin-right:6px;}
+#priorityCards .pc-rules{color:#c9a55a;font-size:0.72rem;line-height:1.55;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #92651633;}
 #priorityCards .pc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;}
 #priorityCards .pc-card{background:#1a1308;border:1px solid #92651655;border-radius:7px;padding:10px 12px;text-decoration:none;display:block;transition:border-color .15s,transform .15s;}
 #priorityCards .pc-card:hover{border-color:#fbbf24;transform:translateY(-1px);}
@@ -430,6 +433,8 @@ renderTable();
 </style>
 <script>
 (function(){
+  var __PRI_LABEL="2026 Q2 北部公家室內裝修甜蜜點";
+  var __PRI_DESC="關鍵字：室內裝修 / 裝修工程 / 整修工程 / 改善工程 ｜ 預算 300–3000 萬 ｜ 截止 7–25 天 ｜ 機關含：國小、國中、高中、高工、高商、大學…等 13 類 ｜ 排除：軍、監獄、看守所";
   function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
   function init(){
     if(typeof records==='undefined')return;
@@ -451,8 +456,9 @@ renderTable();
     all=all.slice(0,12);
     var section=document.createElement('section');
     section.id='priorityCards';
+    var rulesHTML='<div class="pc-rules"><span class="pc-rule-label">'+esc(__PRI_LABEL)+'</span>'+esc(__PRI_DESC)+'</div>';
     if(all.length===0){
-      section.innerHTML='<div class="pc-head"><span class="pc-title">⭐ 期間最優先追蹤</span></div><div class="pc-empty">近期無未過期的最優先案件</div>';
+      section.innerHTML='<div class="pc-head"><span class="pc-title">⭐ 期間最優先追蹤</span></div>'+rulesHTML+'<div class="pc-empty">近期無未過期的最優先案件</div>';
     }else{
       var cards=all.map(function(p){
         return '<a class="pc-card" href="'+esc(p.link)+'" target="_blank">'+
@@ -461,7 +467,7 @@ renderTable();
           '<div class="pc-deadline">截止 '+esc(p.deadline)+'（剩 '+esc(p.days_left)+' 天）　〈來自 <a href="reports/'+esc(p.report_filename)+'" target="_blank">'+esc(p.report_date)+' 日報</a>〉</div>'+
           '</a>';
       }).join('');
-      section.innerHTML='<div class="pc-head"><div><span class="pc-title">⭐ 期間最優先追蹤</span> <span class="pc-sub">未過期最優先案件 '+all.length+' 筆（依截止日排序）</span></div></div><div class="pc-grid">'+cards+'</div>';
+      section.innerHTML='<div class="pc-head"><div><span class="pc-title">⭐ 期間最優先追蹤</span> <span class="pc-sub">未過期最優先案件 '+all.length+' 筆（依截止日排序）</span></div></div>'+rulesHTML+'<div class="pc-grid">'+cards+'</div>';
     }
     var anchor=document.querySelector('.header')||document.querySelector('header')||document.querySelector('h1');
     if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(section,anchor.nextSibling);}
