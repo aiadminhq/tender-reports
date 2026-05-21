@@ -34,7 +34,7 @@ body {
 
 
 /* ── STATS ── */
-.stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+.stats { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 20px; }
 @media(max-width:700px){ .stats{ grid-template-columns:repeat(2,1fr); } }
 .stat { background:#161b27; border:1px solid #1e2d45; border-radius:8px; padding:14px 16px; text-align:center; }
 .stat .val { font-size:1.8rem; font-weight:700; }
@@ -122,6 +122,14 @@ tr:hover td { background: #13182280; }
 }
 .toast.show { opacity:1; }
 
+
+/* ── PRIORITY ROW (auto-installed) ── */
+.badge-pri { display:inline-flex;align-items:center;background:#7c5511;color:#fde68a;border:1px solid #b8860b;border-radius:3px;padding:1px 6px;font-size:0.7rem;font-weight:600;margin-left:6px;white-space:nowrap; }
+tr.pri-day-row td { background:#3b2a0a26; }
+tr.pri-day-row:hover td { background:#3b2a0a55; }
+tr.pri-day-row td:first-child { border-left:3px solid #fbbf24; padding-left:11px; }
+.chip[data-filter="priority"].active { background:#3b2a0a; border-color:#fbbf24; color:#fde68a; }
+
 /* ── FOOTER ── */
 .footer { margin-top:20px; font-size:0.74rem; color:#374151; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
 </style>
@@ -146,6 +154,7 @@ tr:hover td { background: #13182280; }
   <div class="stat"><div class="val green" id="statHigh">0</div><div class="lbl">🟢 高潛力累計</div></div>
   <div class="stat"><div class="val yellow" id="statMid">0</div><div class="lbl">🟡 中潛力累計</div></div>
   <div class="stat"><div class="val orange" id="statUrgent">0</div><div class="lbl">🔥 緊急累計</div></div>
+  <div class="stat"><div class="val" id="statPriority" style="color:#fbbf24">0</div><div class="lbl">⭐ 最優先累計</div></div>
 </div>
 
 <!-- FILTER -->
@@ -154,6 +163,7 @@ tr:hover td { background: #13182280; }
   <span class="chip active" data-filter="all"    onclick="setFilter(this)">全部</span>
   <span class="chip"        data-filter="high"   onclick="setFilter(this)">🟢 有高潛力</span>
   <span class="chip"        data-filter="urgent" onclick="setFilter(this)">🔥 有緊急</span>
+  <span class="chip"        data-filter="priority" onclick="setFilter(this)">⭐ 有最優先</span>
 </div>
 
 <!-- TABLE -->
@@ -196,10 +206,10 @@ let records = [
   {
     date: "2026-05-21",
     total: 134,
-    high: 74,
-    mid: 56,
+    high: 73,
+    mid: 57,
     low: 4,
-    urgent: 74,
+    urgent: 73,
     priority: 8,
     budget: 114002,
     summary: "教學大樓西側老舊廁所整修工程（桃園市大溪區福安國民小學）、115年度建國分隊中央空調設備汰換整修工程（臺北市政府消防局）",
@@ -209,12 +219,13 @@ let records = [
       { name:"美術系特殊教室整修工程", org:"國立臺北藝術大學", case_no:"C115028", deadline:"115/06/01", deadline_iso:"2026-06-01", days_left:11, budget:"878", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjM1MTg=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"115年度北門智慧圖書館空間裝修工程", org:"臺北市立圖書館", case_no:"11507HY", deadline:"115/06/03", deadline_iso:"2026-06-03", days_left:13, budget:"315", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjYzMDM=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"115年臺北市內湖行政中心1樓調解會空間整修工程", org:"臺北市內湖區公所", case_no:"1151009", deadline:"115/06/03", deadline_iso:"2026-06-03", days_left:13, budget:"434", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjY3MTc=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
-      { name:"本院醫療大樓空調箱汰換、門診手術室濕度改善及門急診大樓頂樓空調機房電力改善工程", org:"衛生福利部桃園醫院", case_no:"114TY1202", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"1672", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjM1MDc=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"八德區霖園公園遮雨棚設施改善工程", org:"桃園市八德區公所", case_no:"BB1150520A", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"434", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjYyODE=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"八德區豐德公園及公二公園步道改善工程", org:"桃園市八德區公所", case_no:"BB1150520", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"1454", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjYxODM=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
+      { name:"本院醫療大樓空調箱汰換、門診手術室濕度改善及門急診大樓頂樓空調機房電力改善工程", org:"衛生福利部桃園醫院", case_no:"114TY1202", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"1672", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjM1MDc=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"楊梅區富岡運動公園籃球場改善工程", org:"桃園市楊梅區公所", case_no:"YM-115010", deadline:"115/06/08", deadline_iso:"2026-06-08", days_left:18, budget:"521", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjcxMTk=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" }
     ]
   },
+  
   
   
 {
@@ -281,7 +292,8 @@ function renderTable() {
     const matchFilter =
       activeFilter === 'all' ||
       (activeFilter === 'high'   && r.high > 0) ||
-      (activeFilter === 'urgent' && r.urgent > 0);
+      (activeFilter === 'urgent' && r.urgent > 0) ||
+      (activeFilter === 'priority' && (r.priority || 0) > 0);
     return matchSearch && matchFilter;
   });
 
@@ -308,9 +320,10 @@ function renderTable() {
     const isToday = r.date === todayStr();
 
     const tr = document.createElement('tr');
+    if ((r.priority || 0) > 0) tr.className = 'pri-day-row';
     tr.innerHTML = `
       <td>
-        <div class="date-cell">${r.date}${isToday ? ' <span style="font-size:.67rem;background:#1e3a5f;color:#93c5fd;border:1px solid #3b82f6;border-radius:3px;padding:1px 6px;">今日</span>' : ''}</div>
+        <div class="date-cell">${r.date}${isToday ? ' <span style="font-size:.67rem;background:#1e3a5f;color:#93c5fd;border:1px solid #3b82f6;border-radius:3px;padding:1px 6px;">今日</span>' : ''}${(r.priority || 0) > 0 ? ' <span class="badge-pri">⭐ ' + r.priority + '</span>' : ''}</div>
         <div class="date-sub">（週${weekday}）</div>
       </td>
       <td><strong style="color:#e2e8f0">${r.total}</strong> 件</td>
@@ -338,13 +351,15 @@ function updateStats() {
     total: acc.total + 1,
     high: acc.high + (r.high || 0),
     mid: acc.mid + (r.mid || 0),
-    urgent: acc.urgent + (r.urgent || 0)
-  }), { total: 0, high: 0, mid: 0, urgent: 0 });
+    urgent: acc.urgent + (r.urgent || 0),
+    priority: acc.priority + (r.priority || 0)
+  }), { total: 0, high: 0, mid: 0, urgent: 0, priority: 0 });
 
   document.getElementById('statTotal').textContent  = totals.total;
   document.getElementById('statHigh').textContent   = totals.high;
   document.getElementById('statMid').textContent    = totals.mid;
   document.getElementById('statUrgent').textContent = totals.urgent;
+  var _sp = document.getElementById('statPriority'); if (_sp) _sp.textContent = totals.priority;
 }
 
 function updateSortHeaders() {
