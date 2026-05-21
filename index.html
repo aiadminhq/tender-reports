@@ -150,20 +150,20 @@ tr.pri-day-row td:first-child { border-left:3px solid #fbbf24; padding-left:11px
 
 <!-- STATS -->
 <div class="stats">
+  <div class="stat"><div class="val" id="statPriority" style="color:#fbbf24">0</div><div class="lbl">⭐ 最優先累計</div></div>
   <div class="stat"><div class="val blue" id="statTotal">0</div><div class="lbl">累計報表數</div></div>
   <div class="stat"><div class="val green" id="statHigh">0</div><div class="lbl">🟢 高潛力累計</div></div>
   <div class="stat"><div class="val yellow" id="statMid">0</div><div class="lbl">🟡 中潛力累計</div></div>
   <div class="stat"><div class="val orange" id="statUrgent">0</div><div class="lbl">🔥 緊急累計</div></div>
-  <div class="stat"><div class="val" id="statPriority" style="color:#fbbf24">0</div><div class="lbl">⭐ 最優先累計</div></div>
 </div>
 
 <!-- FILTER -->
 <div class="filter-bar">
+  <span class="chip"        data-filter="priority" onclick="setFilter(this)">⭐ 有最優先</span>
   <input type="text" id="searchInput" placeholder="🔍 搜尋日期、摘要…" oninput="renderTable()">
   <span class="chip active" data-filter="all"    onclick="setFilter(this)">全部</span>
   <span class="chip"        data-filter="high"   onclick="setFilter(this)">🟢 有高潛力</span>
   <span class="chip"        data-filter="urgent" onclick="setFilter(this)">🔥 有緊急</span>
-  <span class="chip"        data-filter="priority" onclick="setFilter(this)">⭐ 有最優先</span>
 </div>
 
 <!-- TABLE -->
@@ -217,14 +217,15 @@ let records = [
     priority_items: [
       { name:"新北市三芝區後厝芝蘭公園貨櫃市集觀海平台環境改善工程", org:"新北市三芝區公所", case_no:"115d007", deadline:"115/05/29", deadline_iso:"2026-05-29", days_left:8, budget:"924", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjU2NjU=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"美術系特殊教室整修工程", org:"國立臺北藝術大學", case_no:"C115028", deadline:"115/06/01", deadline_iso:"2026-06-01", days_left:11, budget:"878", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjM1MTg=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
-      { name:"115年臺北市內湖行政中心1樓調解會空間整修工程", org:"臺北市內湖區公所", case_no:"1151009", deadline:"115/06/03", deadline_iso:"2026-06-03", days_left:13, budget:"434", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjY3MTc=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"115年度北門智慧圖書館空間裝修工程", org:"臺北市立圖書館", case_no:"11507HY", deadline:"115/06/03", deadline_iso:"2026-06-03", days_left:13, budget:"315", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjYzMDM=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
+      { name:"115年臺北市內湖行政中心1樓調解會空間整修工程", org:"臺北市內湖區公所", case_no:"1151009", deadline:"115/06/03", deadline_iso:"2026-06-03", days_left:13, budget:"434", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjY3MTc=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
+      { name:"本院醫療大樓空調箱汰換、門診手術室濕度改善及門急診大樓頂樓空調機房電力改善工程", org:"衛生福利部桃園醫院", case_no:"114TY1202", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"1672", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjM1MDc=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"八德區霖園公園遮雨棚設施改善工程", org:"桃園市八德區公所", case_no:"BB1150520A", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"434", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjYyODE=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"八德區豐德公園及公二公園步道改善工程", org:"桃園市八德區公所", case_no:"BB1150520", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"1454", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjYxODM=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
-      { name:"本院醫療大樓空調箱汰換、門診手術室濕度改善及門急診大樓頂樓空調機房電力改善工程", org:"衛生福利部桃園醫院", case_no:"114TY1202", deadline:"115/06/05", deadline_iso:"2026-06-05", days_left:15, budget:"1672", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjM1MDc=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" },
       { name:"楊梅區富岡運動公園籃球場改善工程", org:"桃園市楊梅區公所", case_no:"YM-115010", deadline:"115/06/08", deadline_iso:"2026-06-08", days_left:18, budget:"521", link:"https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEyMjcxMTk=", hits:"關鍵字 · 指定機關 · 甜蜜預算 · 黃金截止窗" }
     ]
   },
+  
   
   
   
