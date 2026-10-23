@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>標案配發日報 2026-10-23</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Segoe UI','Microsoft JhengHei',sans-serif; background:#0f1117; color:#e2e8f0; padding:20px; }
+.header { background:linear-gradient(135deg,#0d1f3c,#1a2744); border:1px solid #1e3a6e; border-radius:10px; padding:18px 24px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; }
+.header-left h1 { font-size:1.2rem; color:#60a5fa; }
+.header-left p { color:#64748b; font-size:0.8rem; margin-top:4px; }
+.home-btn { display:inline-flex; align-items:center; gap:6px; color:#93c5fd; background:#1e3a5f; border:1px solid #3b82f6; border-radius:8px; padding:7px 16px; font-size:0.82rem; text-decoration:none; white-space:nowrap; transition:background .15s; }
+.home-btn:hover { background:#2d4f7c; }
+.stats { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:16px; }
+@media (max-width:720px) { .stats { grid-template-columns:repeat(2,1fr); } }
+.stat { background:#161b27; border:1px solid #1e2d45; border-radius:8px; padding:12px; text-align:center; }
+.stat .val { font-size:1.6rem; font-weight:700; }
+.stat .lbl { font-size:0.72rem; color:#64748b; margin-top:2px; }
+.table-wrap { overflow-x:auto; border-radius:8px; border:1px solid #1e2d45; }
+table { width:100%; border-collapse:collapse; min-width:860px; }
+thead tr { background:#111827; }
+th { padding:10px 12px; text-align:left; font-size:0.73rem; color:#64748b; text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid #1e2d45; white-space:nowrap; }
+td { padding:10px 12px; border-bottom:1px solid #111827; font-size:0.82rem; color:#cbd5e1; vertical-align:top; }
+tr:last-child td { border-bottom:none; }
+tr:hover td { background:#13182280; }
+.tag-h { color:#4ade80; background:#14532d33; border:1px solid #22c55e55; border-radius:4px; padding:2px 8px; font-size:0.75rem; white-space:nowrap; display:inline-block; }
+.tag-m { color:#facc15; background:#71391233; border:1px solid #ca8a0455; border-radius:4px; padding:2px 8px; font-size:0.75rem; white-space:nowrap; display:inline-block; }
+.tag-l { color:#f87171; background:#7f1d1d33; border:1px solid #ef444455; border-radius:4px; padding:2px 8px; font-size:0.75rem; white-space:nowrap; display:inline-block; }
+.urgent { font-size:0.68rem; background:#7f1d1d; color:#fca5a5; border-radius:3px; padding:1px 5px; margin-left:4px; }
+.budget { color:#fbbf24; font-weight:600; }
+.days-u { font-size:0.73rem; background:#7f1d1d33; color:#f87171; border:1px solid #ef444444; border-radius:3px; padding:1px 6px; display:inline-block; margin-top:2px; }
+.days-o { font-size:0.73rem; background:#14532d33; color:#4ade80; border:1px solid #22c55e44; border-radius:3px; padding:1px 6px; display:inline-block; margin-top:2px; }
+.days-f { font-size:0.73rem; background:#1e2d4533; color:#94a3b8; border:1px solid #1e2d45; border-radius:3px; padding:1px 6px; display:inline-block; margin-top:2px; }
+.link-btn { color:#60a5fa; text-decoration:none; font-size:0.79rem; border:1px solid #1e3a5f; border-radius:4px; padding:3px 9px; display:inline-block; }
+.notice { background:#1c1a0a; border:1px solid #854d0e; border-radius:7px; padding:11px 16px; font-size:0.79rem; color:#fde68a; margin-top:14px; line-height:1.7; }
+.footer { margin-top:14px; font-size:0.73rem; color:#374151; display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; }
+.pri-block { background:linear-gradient(135deg,#2a1f08,#3b2a0a); border:1px solid #b8860b; border-radius:10px; padding:14px 18px; margin-bottom:16px; box-shadow:0 0 18px #b8860b22; }
+.pri-block-empty { display:flex; align-items:center; gap:14px; }
+.pri-block-head { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+.pri-block-title { color:#fbbf24; font-size:1rem; font-weight:700; margin-right:10px; }
+.pri-block-sub { color:#fde68a; font-size:0.8rem; }
+.pri-block-rule { color:#a78b4f; font-size:0.72rem; }
+.pri-card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; }
+.pri-card { background:#1a1308; border:1px solid #92651655; border-radius:7px; padding:10px 12px; text-decoration:none; display:block; transition:border-color .15s,transform .15s; }
+.pri-card:hover { border-color:#fbbf24; transform:translateY(-1px); }
+.pri-card-head { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:5px; }
+.pri-card-name { color:#fde68a; font-weight:600; font-size:0.86rem; line-height:1.35; flex:1; }
+.pri-card-days { color:#f87171; background:#7f1d1d33; border:1px solid #ef444444; border-radius:3px; padding:1px 6px; font-size:0.7rem; white-space:nowrap; }
+.pri-card-meta { display:flex; justify-content:space-between; gap:8px; font-size:0.76rem; color:#94a3b8; margin-bottom:4px; }
+.pri-card-budget { color:#fbbf24; font-weight:600; }
+.pri-card-hits { color:#a78b4f; font-size:0.7rem; }
+.star-tag { margin-left:4px; }
+.pri-row td { background:#1a130833; }
+.pri-row:hover td { background:#2a1f0866; }
+.tmu-block { background:linear-gradient(135deg,#0a1a2a,#0d2438); border:1px solid #2d5a8a; border-radius:10px; padding:14px 18px; margin-top:16px; }
+.tmu-head { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px; }
+.tmu-title { color:#7dd3fc; font-size:1rem; font-weight:700; }
+.tmu-sub { color:#bae6fd; font-size:0.8rem; }
+.tmu-source { margin-left:auto; font-size:0.72rem; }
+.tmu-source a { color:#64748b; text-decoration:none; }
+.tmu-source a:hover { color:#7dd3fc; }
+.tmu-cat { display:inline-block; font-size:0.72rem; color:#7dd3fc; background:#0c2d4a; border:1px solid #2d5a8a; border-radius:3px; padding:1px 6px; white-space:nowrap; }
+.tmu-hosp { display:inline-block; font-size:0.72rem; color:#c4b5fd; background:#2d1f4a; border:1px solid #5b21b6; border-radius:3px; padding:1px 6px; white-space:nowrap; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <h1>📋 標案配發日報｜北部工程版</h1>
+    <p>日期：2026-10-23 ｜ 關鍵字：裝修/改善/整修/裝潢/汰換 ｜ 北部・工程優先（財物/勞務需關鍵字命中）｜ 排除最有利標 ｜ 預算≤8,000萬 ｜ 排除7天內截止（最優先除外）</p>
+  </div>
+  <a class="home-btn" href="https://aiadminhq.github.io/tender-reports/">← 返回首頁</a>
+</div>
+<div class="stats">
+  <div class="stat"><div class="val" style="color:#60a5fa">16</div><div class="lbl">今日命中</div></div>
+  <div class="stat"><div class="val" style="color:#fbbf24">0</div><div class="lbl">⭐ 期間最優先</div></div>
+  <div class="stat"><div class="val" style="color:#4ade80">15</div><div class="lbl">🟢 高潛力 ≤14天</div></div>
+  <div class="stat"><div class="val" style="color:#facc15">0</div><div class="lbl">🟡 中潛力 15-30</div></div>
+  <div class="stat"><div class="val" style="color:#f87171">1</div><div class="lbl">🔴 低潛力 ≥31</div></div>
+</div>
+<div class="pri-block pri-block-empty">
+  <span class="pri-block-title">⭐ 期間最優先案件</span>
+  <span class="pri-block-sub">北投分隊寢室整修 · 本日無命中</span>
+</div>
+<div class="notice">
+  <strong>⚠️ 今日行動優先序：</strong><br>
+  • <b>信義樓右側廁所改善工程</b>（新北市立五股國民中學）截止 115/11/02，剩 10 天，預算 165 萬，請優先備標。<br>
+  • <b>新北市新莊區裕民國小愛群樓西側廁所整修工程採購案</b>（新北市新莊區裕民國民小學）截止 115/11/02，剩 10 天，預算 496 萬，請優先備標。<br>
+  • <b>115年育林國中美言樓老舊廁所整修工程</b>（新北市立育林國民中學）截止 115/11/02，剩 10 天，預算 592 萬，請優先備標。<br>
+  • <b>115年度校園進出口等監控設備汰換財物採購</b>（臺北市信義區光復國民小學）截止 115/11/02，剩 10 天，預算 108 萬，請優先備標。<br>
+  • <b>115年度智慧大屏汰換採購案</b>（臺北市立百齡高級中學）截止 115/11/02，剩 10 天，預算 25 萬，請優先備標。
+</div>
+<div class="tmu-block">
+  <div class="tmu-head">
+    <span class="tmu-title">📍 北醫附屬機構聯合採購</span>
+    <span class="tmu-sub">營繕工程 · 命中 8 筆</span>
+    <span class="tmu-source"><a href="https://cmd.tmu.edu.tw/Front/TMU/Purchase.aspx?id=s%2F%2FumQ4Ml78=" target="_blank">cmd.tmu.edu.tw ↗</a></span>
+  </div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>類別</th><th>院區</th><th>採購名稱</th><th>截止日期</th><th>連結</th></tr></thead>
+    <tbody>
+    <tr>
+      <td><span class="tmu-cat">營繕工程</span></td>
+      <td><span class="tmu-hosp">雙和醫院</span></td>
+      <td>11B 15-19負壓隔離病房天花板修改工程案-1式</td>
+      <td>2026-10-23<br><span class="days-u">剩 0 天</span></td>
+      <td><a class="link-btn" href="https://cmd.tmu.edu.tw/Download.aspx?dir=Purchase&file=B9-92-37-76-35-13-6C-71-70-8F-88-24-E0-58-2B-CC.pdf&filename=%e8%87%ba%e5%8c%97%e9%86%ab%e5%ad%b8%e5%a4%a7%e5%ad%b8%e9%99%84%e5%b1%ac%e6%a9%9f%e6%a7%8b%e8%81%af%e5%90%88%e6%8e%a1%e8%b3%bc%e7%b6%b2%e8%a9%a2%e5%83%b9%e5%96%ae-C-B-3-26-0109-02&sn=9015" target="_blank">PDF</a> <a class="link-btn" href="https://cmd.tmu.edu.tw/Front/TMU/Page.aspx?id=dX0SPPp16anAYxoP47osog==" target="_blank">詳細</a></td>
+    </tr>
+    <tr>
+      <td><span class="tmu-cat">營繕工程</span></td>
+      <td><span class="tmu-hosp">附設醫院</span></td>
+      <td>精神科門診搬遷整修工程案-1式</td>
+      <td>2026-10-23<br><span class="days-u">剩 0 天</span></td>
+      <td><a class="link-btn" href="https://cmd.tmu.edu.tw/Download.aspx?dir=Purchase&file=FB-03-65-67-EA-8C-AF-B4-00-F2-B5-25-3A-B1-1B-43.pdf&filename=%e8%87%ba%e5%8c%97%e9%86%ab%e5%ad%b8%e5%a4%a7%e5%ad%b8%e9%99%84%e5%b1%ac%e6%a9%9f%e6%a7%8b%e8%81%af%e5%90%88%e6%8e%a1%e8%b3%bc%e7%b6%b2%e8%a9%a2%e5%83%b9%e5%96%ae-C-B-1-26-0105-02&sn=9013" target="_blank">PDF</a> <a class="link-btn" href="https://cmd.tmu.edu.tw/Front/TMU/Page.aspx?id=dX0SPPp16aklKGtIMphOMw==" target="_blank">詳細</a></td>
+    </tr>
+    <tr>
+      <td><span class="tmu-cat">營繕工程</span></td>
+      <td><span class="tmu-hosp">附設醫院</span></td>
+      <td>院外辦公室電信系統建置工程案-1式</td>
+      <td>2026-10-23<br><span class="days-u">剩 0 天</span></td>
+      <td><a class="link-btn" href="https://cmd.tmu.edu.tw/Download.aspx?dir=Purchase&file=BF-4B-82-FA-BD-EC-4F-32-D1-1D-F8-B6-1B-91-17-06.pdf&filename=%e8%87%ba%e5%8c%97%e9%86%ab%e5%ad%b8%e5%a4%a7%e5%ad%b8%e9%99%84%e5%b1%ac%e6%a9%9f%e6%a7%8b%e8%81%af%e5%90%88%e6%8e%a1%e8%b3%bc%e7%b6%b2%e8%a9%a2%e5%83%b9%e5%96%ae-C-B-1-26-0110-02&sn=9011" target="_blank">PDF</a> <a class="link-btn" href="https://cmd.tmu.edu.tw/Front/TMU/Page.aspx?id=dX0SPPp16akwflIcLsTZsg==" target="_blank">詳細</a></td>
+    </tr>
+    <tr>
+      <td><span class="tmu-cat">營繕工程</span></td>
+      <td><span class="tmu-hosp">萬芳醫院</span></td>
+      <td>營養室爐灶區消防設備工程案-1式</td>
+      <td>2026-10-27<br><span class="days-u">剩 4 天</span></td>
+      <td><a class="link-btn" href="https://cmd.tmu.edu.tw/Download.aspx?dir=Purchase&file=13-A1-36-2D-5B-94-96-EB-1C-09-7D-F7-52-64-72-83.pdf&filename=%e8%87%ba%e5%8c%97%e9%86%ab%e5%ad%b8%e5%a4%a7%e5%ad%b8%e9%99%84%e5%b1%ac%e6%a9%9f%e6%a7%8b%e8%81%af%e5%90%88%e6%8e%a1%e8%b3%bc%e7%b6%b2%e8%a9%a2%e5%83%b9%e5%96%ae-C-B-2-26-0111&sn=9089" target="_blank">PDF</a> <a class="link-btn" href="https://cmd.tmu.edu.tw/Front/TMU/Page.aspx?id=dX0SPPp16algnNlDVGuctA==" target="_blank">詳細</a></td>
+    </tr>
+    <tr>
+      <td><span class="tmu-cat">營繕工程</span></td>
+      <td><span class="tmu-hosp">附設醫院</span></td>
+      <td>門診藥局空調改善工程案-1式</td>
+      <td>2026-10-27<br><span class="days-u">剩 4 天</span></td>
+      <td><a class="link-btn" href="https://cmd.tmu.edu.tw/Download.aspx?dir=Purchase&file=AB-ED-04-3B-FC-D0-4F-8E-2D-F0-DF-8A-A7-13-5E-0C.pdf&filename=%e8%87%ba%e5%8c%97%e9%86%ab%e5%ad%b8%e5%a4%a7%e5%ad%b8%e9%99%84%e5%b1%ac%e6%a9%9f%e6%a7%8b%e8%81%af%e5%90%88%e6%8e%a1%e8%b3%bc%e7%b6%b2%e8%a9%a2%e5%83%b9%e5%96%ae-C-B-1-260112&sn=9087" target="_blank">PDF</a> <a class="link-btn" href="https://cmd.tmu.edu.tw/Front/TMU/Page.aspx?id=dX0SPPp16amfxo6UXIgZ8w==" target="_blank">詳細</a></td>
+    </tr>
+    <tr>
+      <td><span class="tmu-cat">營繕工程</span></td>
+      <td><span class="tmu-hosp">雙和醫院</span></td>
+      <td>鍋爐燃燒機故障維修工程案-1式</td>
+      <td>2026-10-27<br><span class="days-u">剩 4 天</span></td>
+      <td><a class="link-btn" href="https://cmd.tmu.edu.tw/Download.aspx?dir=Purchase&file=3C-AE-F5-8E-C3-44-46-3F-F1-0E-85-F0-3E-CB-10-73.pdf&filename=%e8%87%ba%e5%8c%97%e9%86%ab%e5%ad%b8%e5%a4%a7%e5%ad%b8%e9%99%84%e5%b1%ac%e6%a9%9f%e6%a7%8b%e8%81%af%e5%90%88%e6%8e%a1%e8%b3%bc%e7%b6%b2%e8%a9%a2%e5%83%b9%e5%96%ae-C-B-3-26-0113&sn=9085" target="_blank">PDF</a> <a class="link-btn" href="https://cmd.tmu.edu.tw/Front/TMU/Page.aspx?id=dX0SPPp16antb5b858TRoA==" target="_blank">詳細</a></td>
+    </tr>
+    <tr>
+      <td><span class="tmu-cat">營繕工程</span></td>
+      <td><span class="tmu-hosp">雙和醫院</span></td>
+      <td>第二醫療大樓廣場景觀排水工程案-1式</td>
+      <td>2026-10-27<br><span class="days-u">剩 4 天</span></td>
+      <td><a class="link-btn" href="https://cmd.tmu.edu.tw/Download.aspx?dir=Purchase&file=BE-2C-29-3A-C9-67-26-1C-19-42-EE-59-16-0D-69-A5.pdf&filename=%e8%87%ba%e5%8c%97%e9%86%ab%e5%ad%b8%e5%a4%a7%e5%ad%b8%e9%99%84%e5%b1%ac%e6%a9%9f%e6%a7%8b%e8%81%af%e5%90%88%e6%8e%a1%e8%b3%bc%e7%b6%b2%e8%a9%a2%e5%83%b9%e5%96%ae-C-B-3-26-0114&sn=9083" target="_blank">PDF</a> <a class="link-btn" href="https://cmd.tmu.edu.tw/Front/TMU/Page.aspx?id=dX0SPPp16ali1xJ8%2BwWs%2BA==" target="_blank">詳細</a></td>
+    </tr>
+    <tr>
+      <td><span class="tmu-cat">營繕工程</span></td>
+      <td><span class="tmu-hosp">附設醫院</span></td>
+      <td>蔡萬才癌症大樓消防受信總機整合工程案-1式</td>
+      <td>2026-10-28<br><span class="days-u">剩 5 天</span></td>
+      <td><a class="link-btn" href="https://cmd.tmu.edu.tw/Download.aspx?dir=Purchase&file=36-36-EE-FB-CD-62-AE-99-06-65-0A-9B-57-49-86-68.pdf&filename=%e8%87%ba%e5%8c%97%e9%86%ab%e5%ad%b8%e5%a4%a7%e5%ad%b8%e9%99%84%e5%b1%ac%e6%a9%9f%e6%a7%8b%e8%81%af%e5%90%88%e6%8e%a1%e8%b3%bc%e7%b6%b2%e8%a9%a2%e5%83%b9%e5%96%ae-C-B-1-26-0116&sn=9098" target="_blank">PDF</a> <a class="link-btn" href="https://cmd.tmu.edu.tw/Front/TMU/Page.aspx?id=dX0SPPp16akqLKfJYHekOQ==" target="_blank">詳細</a></td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>潛力</th><th>標案名稱 / 採購機關</th><th>預算金額</th><th>截止日期</th><th>招標方式</th><th>連結</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#1e3a5f;color:#93c5fd;font-weight:600" title="標的分類">工程</span>信義樓右側廁所改善工程</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">新北市立五股國民中學</div>
+      </td>
+      <td><span class="budget">165萬</span></td>
+      <td>115/11/02<div><span class="days-o">剩 10 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjAxNDY=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#1e3a5f;color:#93c5fd;font-weight:600" title="標的分類">工程</span>新北市新莊區裕民國小愛群樓西側廁所整修工程採購案</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">新北市新莊區裕民國民小學</div>
+      </td>
+      <td><span class="budget">496萬</span></td>
+      <td>115/11/02<div><span class="days-o">剩 10 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjE5NDY=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#1e3a5f;color:#93c5fd;font-weight:600" title="標的分類">工程</span>115年育林國中美言樓老舊廁所整修工程</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">新北市立育林國民中學</div>
+      </td>
+      <td><span class="budget">592萬</span></td>
+      <td>115/11/02<div><span class="days-o">剩 10 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjE0MjA=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#1e3a5f;color:#93c5fd;font-weight:600" title="標的分類">工程</span>一般教室教學環境及設施設備改善工程</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">新北市三峽區五寮國民小學</div>
+      </td>
+      <td><span class="budget">180萬</span></td>
+      <td>115/11/03<div><span class="days-o">剩 11 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNTk5ODg=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#1e3a5f;color:#93c5fd;font-weight:600" title="標的分類">工程</span>116學年度新設數理資優班教室整修工程採購案</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">臺北市立中山國民中學</div>
+      </td>
+      <td><span class="budget">270萬</span></td>
+      <td>115/11/03<div><span class="days-o">剩 11 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjI0MTI=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#1e3a5f;color:#93c5fd;font-weight:600" title="標的分類">工程</span>115年度新泰國小新泰樓F棟男廁G棟女廁整修工程</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">新北市新莊區新泰國民小學</div>
+      </td>
+      <td><span class="budget">846萬</span></td>
+      <td>115/11/03<div><span class="days-o">剩 11 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjAxMTU=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#1e3a5f;color:#93c5fd;font-weight:600" title="標的分類">工程</span>115年博愛校區中正堂3樓球場地板整修工程</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">臺北市立大學</div>
+      </td>
+      <td><span class="budget">482萬</span></td>
+      <td>115/11/03<div><span class="days-o">剩 11 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNTgyMTE=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#1e3a5f;color:#93c5fd;font-weight:600" title="標的分類">工程</span>新店防疫中心房舍整修工程</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">新北市政府採購處</div>
+      </td>
+      <td><span class="budget">2992萬</span></td>
+      <td>115/11/04<div><span class="days-o">剩 12 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjE4NDk=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#1e3a5f;color:#93c5fd;font-weight:600" title="標的分類">工程</span>萬里區員潭溪出河口拓寬及分洪、河道拓寬等三案改善工程</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">新北市政府採購處</div>
+      </td>
+      <td><span class="budget">7682萬</span></td>
+      <td>115/11/05<div><span class="days-o">剩 13 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjE0OTE=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-l">🔴 低潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#1e3a5f;color:#93c5fd;font-weight:600" title="標的分類">工程</span>115年度行政大樓室內空間整修暨設備改善工程</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">新北市三峽區安溪國民小學</div>
+      </td>
+      <td><span class="budget">1171萬</span></td>
+      <td>115/11/23<div><span class="days-f">剩 31 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjE4MDc=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#334155;color:#94a3b8" title="標的分類">財物</span>115年度校園進出口等監控設備汰換財物採購</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">臺北市信義區光復國民小學</div>
+      </td>
+      <td><span class="budget">108萬</span></td>
+      <td>115/11/02<div><span class="days-o">剩 10 天</span></div></td>
+      <td style="font-size:0.78rem">公開取得報價單或企劃書</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjIyOTU=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#334155;color:#94a3b8" title="標的分類">財物</span>115年度智慧大屏汰換採購案</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">臺北市立百齡高級中學</div>
+      </td>
+      <td><span class="budget">25萬</span></td>
+      <td>115/11/02<div><span class="days-o">剩 10 天</span></div></td>
+      <td style="font-size:0.78rem">公開取得報價單或企劃書</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjE3NzE=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#334155;color:#94a3b8" title="標的分類">財物</span>115年度教室門老舊汰換修繕(第一次修正)</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">新北市汐止區金龍國民小學</div>
+      </td>
+      <td><span class="budget">200萬</span></td>
+      <td>115/11/03<div><span class="days-o">剩 11 天</span></div></td>
+      <td style="font-size:0.78rem">公開招標</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjA3MjU=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#334155;color:#94a3b8" title="標的分類">勞務</span>B棟外牆防水及校舍整修工程委託規劃設計監造技術服務勞務</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">臺北市中山區濱江國民小學</div>
+      </td>
+      <td><span class="budget">24萬</span></td>
+      <td>115/11/02<div><span class="days-o">剩 10 天</span></div></td>
+      <td style="font-size:0.78rem">公開取得報價單或企劃書</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjAxNjU=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#334155;color:#94a3b8" title="標的分類">勞務</span>忠孝樓屋頂整修工程委託技術服務採購</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">臺北市南港區玉成國民小學</div>
+      </td>
+      <td><span class="budget">19萬</span></td>
+      <td>115/11/03<div><span class="days-o">剩 11 天</span></div></td>
+      <td style="font-size:0.78rem">公開取得報價單或企劃書</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNjEyOTg=" target="_blank">→ 查看</a></td>
+    </tr>
+    <tr>
+      <td><span class="tag-h">🟢 高潛力</span></td>
+      <td>
+        <div style="color:#e2e8f0;font-weight:500"><span style="display:inline-block;font-size:0.68rem;padding:1px 6px;border-radius:4px;margin-right:6px;background:#334155;color:#94a3b8" title="標的分類">勞務</span>115年度天母校區教學與設備支持計畫-空間整修工程委託規劃設計監造技術服務</div>
+        <div style="color:#94a3b8;font-size:0.77rem;margin-top:2px">臺北市立大學</div>
+      </td>
+      <td><span class="budget">22萬</span></td>
+      <td>115/11/04<div><span class="days-o">剩 12 天</span></div></td>
+      <td style="font-size:0.78rem">公開取得報價單或企劃書</td>
+      <td><a class="link-btn" href="https://web.pcc.gov.tw/prkms/urlSelector/common/tpam?pk=NzEzNTgwNjc=" target="_blank">→ 查看</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="footer">
+  <span>📦 資料來源：web.pcc.gov.tw ｜ 篩選：北部 + 工程優先(財物/勞務需關鍵字) + 排除最有利標 + 排除7天內(最優先除外) ｜ 預算總額：15275 萬</span>
+  <span>📁 tender-20261023.html ｜ 🔗 https://aiadminhq.github.io/tender-reports/reports/tender-20261023.html</span>
+</div>
+</body>
+</html>
